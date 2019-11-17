@@ -1,0 +1,47 @@
+# The behavior of RuboCop can be controlled via the .rubocop.yml
+# configuration file. It makes it possible to enable/disable
+# certain cops (checks) and to alter their behavior if they accept
+# any parameters. The file can be placed either in your home
+# directory or in some project directory.
+#
+# RuboCop will start looking for the configuration file in the directory
+# where the inspected file is and continue its way up to the root directory.
+#
+# See https://github.com/rubocop-hq/rubocop/blob/master/manual/configuration.md
+AllCops:
+  Exclude:
+    - 'Gemfile'
+    - 'vendor/**/*'
+    - 'config/routes.rb'
+    - 'spec/spec_helper.rb'
+  TargetRubyVersion: 2.6.3
+
+# 日本語のコメントを有効
+Style/AsciiComments:
+  Enabled: false
+
+# 文字列リテラルのイミュータブルの強制を無効
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# トップレベルのドキュメント無しを許可
+Style/Documentation:
+  Enabled: false
+
+# メソッド内の行数メトリクスチェックを無効
+Metrics/MethodLength:
+  Enabled: false
+
+# 曖昧なRegexリテラルを許可
+Lint/AmbiguousRegexpLiteral:
+  Enabled: false
+
+# 行数のメトリクスを無効
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*_spec.rb"
+
+# eval の許可
+Security/Eval:
+  Exclude:
+  - "spec/unit/lib/route_spec.rb"
