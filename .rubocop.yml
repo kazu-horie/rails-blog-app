@@ -12,7 +12,11 @@ AllCops:
   Exclude:
     - 'Gemfile'
     - 'vendor/**/*'
-    - 'config/routes.rb'
+    - 'node_modules/**/*'
+    - 'config/**/*'
+    - 'test/**/*'
+    - 'db/schema.rb'
+    - 'bin/**/*'
     - 'spec/spec_helper.rb'
   TargetRubyVersion: 2.6.3
 
@@ -40,6 +44,10 @@ Lint/AmbiguousRegexpLiteral:
 Metrics/BlockLength:
   Exclude:
     - "spec/**/*_spec.rb"
+
+# 一行の文字長制限を無効
+Metrics/LineLength:
+  Enabled: false
 
 # eval の許可
 Security/Eval:

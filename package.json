@@ -8,6 +8,13 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "husky": "^3.1.0",
     "webpack-dev-server": "^3.9.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "bundle exec rubocop .",
+      "pre-push": "bundle exec rubocop ."
+    }
   }
 }
