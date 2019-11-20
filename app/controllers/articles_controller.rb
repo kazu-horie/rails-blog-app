@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+  http_basic_authenticate_with name: ENV['USER_NAME'], password: ENV['PASSWORD']
+
   def new
     @article = Article.new
   end
