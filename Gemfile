@@ -39,6 +39,8 @@ group :development do
 
   gem 'solargraph'
   gem 'rubocop'
+  gem 'guard'
+  gem 'guard-minitest'
 end
 
 group :test do
