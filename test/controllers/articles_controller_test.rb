@@ -1,8 +1,10 @@
 require 'test_helper'
 
 class ArticlesControllerTest < ActionDispatch::IntegrationTest
+  include DatabaseCleanerSupport
+
   setup do
-    @article = articles(:one)
+    @article = create(:article)
 
     @auth_headers = { Authorization:
       ActionController::HttpAuthentication::Basic
@@ -33,7 +35,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
       )
     end
 
-    assert_redirected_to article_url(Article.last)
+    assert_redirected_to article_url(Article.find_by(title: 'test'))
   end
 
   test "should show article" do
