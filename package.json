@@ -13,8 +13,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "bundle exec rubocop .",
-      "pre-push": "bundle exec rubocop ."
+      "pre-commit": "bundle exec rubocop . && bin/rails test",
+      "pre-push": "bundle exec rubocop . && bin/rails test"
     }
   }
 }
