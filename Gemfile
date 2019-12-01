@@ -7,6 +7,8 @@ ruby '2.6.3'
 gem 'rails', '~> 6.0.1'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.4.4'
+# Use mongodb as the database
+gem 'mongoid'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
