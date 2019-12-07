@@ -24,7 +24,9 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
   test "should create article" do
     assert_difference('Article.count') do
       article_params = {
-        title: 'test', description: 'testtesttest'
+        user_id: @article.user_id,
+        title: 'test',
+        description: 'testtesttest'
       }
       post(
         articles_url,
