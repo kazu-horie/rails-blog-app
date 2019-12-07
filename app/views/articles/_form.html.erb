@@ -24,6 +24,11 @@
   </p>
 
   <p>
+    <%= form.label :poster %><br>
+    <%= form.select :user_name, @users.map{ |u| u.name } %>
+  </p>
+
+  <p>
     <%= form.submit %>
   </p>
 <% end %>

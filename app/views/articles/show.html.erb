@@ -8,4 +8,9 @@
   <%= @article.description %>
 </p>
 
+<p>
+  <strong>Poster:</strong>
+  <%= @article.user.name %>
+</p>
+
 <%= link_to 'Back', articles_path %>

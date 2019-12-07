@@ -24,7 +24,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
   test "should create article" do
     assert_difference('Article.count') do
       article_params = {
-        user_id: @article.user_id,
+        user_name: @article.user.name,
         title: 'test',
         description: 'testtesttest'
       }
@@ -54,7 +54,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
     patch(
       article_url(@article),
       headers: @auth_headers,
-      params: { article: { title: 'test2'} }
+      params: { article: { title: 'test2', user_name: @article.user.name } }
     )
 
     assert_redirected_to article_url(@article)

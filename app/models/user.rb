@@ -3,6 +3,11 @@ class User < ApplicationRecord
 
   has_many :articles
 
-  validates :name, presence: true, length: { minimum: 8 }
-  validates :password, presence: true
+  validates :name,
+    presence: true,
+    uniqueness: true,
+    length: { minimum: 8 }
+  validates :password,
+    presence: true,
+    confirmation: true
 end

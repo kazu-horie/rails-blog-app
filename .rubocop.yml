@@ -53,3 +53,6 @@ Metrics/LineLength:
 Security/Eval:
   Exclude:
   - "spec/unit/lib/route_spec.rb"
+
+Layout/AlignArguments:
+  Enabled: false
