@@ -3,16 +3,13 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.1'
-# Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.4.4'
-# Use Puma as the app server
 gem 'puma', '~> 4.1'
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 4.0'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
+gem 'redis'
+
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
