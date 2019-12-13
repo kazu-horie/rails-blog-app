@@ -4,29 +4,38 @@ class ApplicationRecord < ActiveRecord::Base
   def update(params)
     super(params)
 
-    cache_params = {}
-    encode_with(cache_params)
-    Rails.cache.write(self.class.cache_key(id), cache_params)
+    self.class.write_cache(self)
   end
 
   class << self
     def find(id)
-      if Rails.cache.exist?(cache_key(id))
-        cache_params = Rails.cache.read(cache_key(id))
-        return Article.allocate.init_with(cache_params)
-      end
+      record = read_cache(id)
+
+      return record if record
 
       record = super(id)
 
-      cache_params = {}
-      record.encode_with(cache_params)
-      Rails.cache.write(cache_key(id), cache_params)
+      write_cache(record)
 
       record
     end
 
-    def cache_key(id)
-      "#{to_s.downcase.pluralize}/#{id}"
+    def cache_key(record_id)
+      "#{to_s.downcase.pluralize}/#{record_id}"
+    end
+
+    def read_cache(record_id)
+      serialized_record = Rails.cache.read(cache_key(record_id))
+
+      return unless serialized_record
+
+      Article.allocate.init_with(serialized_record)
+    end
+
+    def write_cache(record)
+      serialized_record = {}
+      record.encode_with(serialized_record)
+      Rails.cache.write(cache_key(record.id), serialized_record)
     end
   end
 end
