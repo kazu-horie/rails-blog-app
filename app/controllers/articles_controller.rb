@@ -6,7 +6,9 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find(params[:id])
+    benchmark('articles#show') do
+      @article = Article.find(params[:id])
+    end
   end
 
   def new
