@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class ArticlesControllerTest < ActionDispatch::IntegrationTest
+  include CacheCleaner
+
   setup do
     @article = articles(:one)
 

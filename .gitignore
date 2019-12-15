@@ -32,4 +32,6 @@ yarn-debug.log*
 
 /vendor
 .env
+.env.development
+.env.test
 coverage
