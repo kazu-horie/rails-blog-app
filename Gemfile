@@ -9,7 +9,6 @@ gem 'puma', '~> 4.1'
 gem 'webpacker', '~> 4.0'
 gem 'jbuilder', '~> 2.7'
 gem 'redis'
-gem 'json'
 
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
