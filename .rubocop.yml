@@ -46,7 +46,7 @@ Metrics/BlockLength:
     - "spec/**/*_spec.rb"
 
 # 一行の文字長制限を無効
-Metrics/LineLength:
+Layout/LineLength:
   Enabled: false
 
 # eval の許可
