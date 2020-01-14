@@ -27,5 +27,9 @@ yarn-debug.log*
 .yarn-integrity
 
 /vendor
+
 .env
+.env.development
+.env.test
+
 coverage
