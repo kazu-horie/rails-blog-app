@@ -31,11 +31,21 @@ module RecordCache
       record.encode_with(serialized_record)
       Rails.cache.write(cache_key(record.id), serialized_record)
     end
+
+    def delete_cache(record)
+      Rails.cache.delete(cache_key(record.id))
+    end
   end
 
   def update(params)
     super(params)
 
     self.class.write_cache(self)
+  end
+
+  def destroy
+    super
+
+    self.class.delete_cache(self)
   end
 end

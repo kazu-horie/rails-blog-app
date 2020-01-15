@@ -1,4 +1,6 @@
 class Article < ApplicationRecord
+  include RecordCache
+
   belongs_to :user
 
   validates :user_id, presence: true

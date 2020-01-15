@@ -7,6 +7,10 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+
+    fail ActiveRecord::RecordNotFound unless current_user.has?(@article)
+
+    @article
   end
 
   def new
@@ -14,8 +18,6 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @user = current_user
-
     @article = Article.new(article_params.merge(user_id: current_user.id))
 
     if @article.save
@@ -27,12 +29,16 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
+
+    fail ActiveRecord::RecordNotFound unless current_user.has?(@article)
+
+    @article
   end
 
   def update
-    @user = current_user
+    @article = Article.find(params[:id])
 
-    @article = Article.find_by(id: params[:id], user_id: current_user.id)
+    fail ActiveRecord::RecordNotFound unless current_user.has?(@article)
 
     if @article.update(article_params)
       redirect_to @article

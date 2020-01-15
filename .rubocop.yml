@@ -53,3 +53,7 @@ Layout/LineLength:
 Security/Eval:
   Exclude:
   - "spec/unit/lib/route_spec.rb"
+
+# 例外の送出方法
+SignalException:
+  EnforcedStyle: semantic
