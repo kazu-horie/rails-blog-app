@@ -3,7 +3,4 @@
 one:
   title: MyString
   description: MyText
-
-two:
-  title: MyString
-  description: MyText
+  user: mike

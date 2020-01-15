@@ -14,7 +14,9 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(article_params)
+    @user = current_user
+
+    @article = Article.new(article_params.merge(user_id: current_user.id))
 
     if @article.save
       redirect_to @article
@@ -28,7 +30,9 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article = Article.find(params[:id])
+    @user = current_user
+
+    @article = Article.find_by(id: params[:id], user_id: current_user.id)
 
     if @article.update(article_params)
       redirect_to @article

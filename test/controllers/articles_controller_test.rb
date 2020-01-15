@@ -2,23 +2,24 @@ require 'test_helper'
 
 class ArticlesControllerTest < ActionDispatch::IntegrationTest
   include CacheCleaner
+  include Devise::Test::IntegrationHelpers
 
   setup do
-    @article = articles(:one)
+    @user = users(:mike)
 
-    @auth_headers = { Authorization:
-      ActionController::HttpAuthentication::Basic
-      .encode_credentials(ENV['USER_NAME'], ENV['PASSWORD']) }
+    sign_in(@user)
+
+    @article = articles(:one)
   end
 
   test "should get index" do
-    get(articles_url, headers: @auth_headers)
+    get(articles_url)
 
     assert_response :success
   end
 
   test "should get new" do
-    get(new_article_url, headers: @auth_headers)
+    get(new_article_url)
 
     assert_response :success
   end
@@ -26,12 +27,12 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
   test "should create article" do
     assert_difference('Article.count') do
       article_params = {
-        title: 'test', description: 'testtesttest'
+        title: 'test',
+        description: 'testtesttest'
       }
       post(
         articles_url,
         params: { article: article_params },
-        headers: @auth_headers
       )
     end
 
@@ -39,13 +40,13 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show article" do
-    get(article_url(@article), headers: @auth_headers)
+    get(article_url(@article))
 
     assert_response :success
   end
 
   test "should get edit" do
-    get(edit_article_url(@article), headers: @auth_headers)
+    get(edit_article_url(@article))
 
     assert_response :success
   end
@@ -53,7 +54,6 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
   test "should update article" do
     patch(
       article_url(@article),
-      headers: @auth_headers,
       params: { article: { title: 'test2'} }
     )
 
@@ -62,7 +62,7 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
 
   test "should destroy article" do
     assert_difference('Article.count', -1) do
-      delete(article_url(@article), headers: @auth_headers)
+      delete(article_url(@article))
     end
 
     assert_redirected_to articles_url
