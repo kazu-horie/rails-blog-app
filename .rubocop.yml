@@ -32,6 +32,10 @@ Style/FrozenStringLiteralComment:
 Style/Documentation:
   Enabled: false
 
+# 例外の送出方法
+Style/SignalException:
+  EnforcedStyle: semantic
+
 # メソッド内の行数メトリクスチェックを無効
 Metrics/MethodLength:
   Enabled: false
@@ -53,7 +57,3 @@ Layout/LineLength:
 Security/Eval:
   Exclude:
   - "spec/unit/lib/route_spec.rb"
-
-# 例外の送出方法
-SignalException:
-  EnforcedStyle: semantic

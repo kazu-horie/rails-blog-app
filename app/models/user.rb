@@ -7,6 +7,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   def has?(model)
-    self.id == model.user_id
+    id == model.user_id
   end
 end

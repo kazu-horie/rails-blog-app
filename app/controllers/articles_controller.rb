@@ -8,8 +8,6 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
 
-    fail ActiveRecord::RecordNotFound unless current_user.has?(@article)
-
     @article
   end
 
@@ -49,6 +47,9 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article = Article.find(params[:id])
+
+    fail ActiveRecord::RecordNotFound unless current_user.has?(@article)
+
     @article.destroy
 
     redirect_to articles_path
