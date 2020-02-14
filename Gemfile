@@ -22,6 +22,8 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   gem 'dotenv-rails', require: 'dotenv/rails-now'
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -35,7 +37,6 @@ group :development do
   gem 'solargraph'
   gem 'rubocop'
   gem 'guard'
-  gem 'guard-minitest'
 end
 
 group :test do
@@ -46,6 +47,8 @@ group :test do
   gem 'webdrivers'
 
   gem 'simplecov'
+  gem 'database_cleaner-active_record'
+  gem 'shoulda-matchers'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

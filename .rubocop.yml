@@ -14,7 +14,7 @@ AllCops:
     - 'vendor/**/*'
     - 'node_modules/**/*'
     - 'config/**/*'
-    - 'test/**/*'
+    - 'spec/**/*'
     - 'db/schema.rb'
     - 'bin/**/*'
     - 'spec/spec_helper.rb'
