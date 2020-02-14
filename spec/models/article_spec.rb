@@ -9,7 +9,7 @@ RSpec.describe Article, type: :model do
     it { should validate_presence_of(:description) }
   end
 
-  describe '.search_by_title' do
+  describe '.search' do
     let!(:articles) do
       titles.map do |title|
         create(
@@ -29,7 +29,7 @@ RSpec.describe Article, type: :model do
     end
     let(:user) { create(:user) }
 
-    subject { Article.search_by_title('ホテル').to_a }
+    subject { Article.search(columns: [:title], keywords: 'ホテル').to_a }
 
     before do
       # FIXME: 手動で FullText Index を作成しないとインデックスが使えない
