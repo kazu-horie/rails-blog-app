@@ -2,6 +2,11 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    if params[:q]
+      @articles = Article.search(columns: [:title], keywords: params[:q])
+      return
+    end
+
     @articles = Article.all
   end
 

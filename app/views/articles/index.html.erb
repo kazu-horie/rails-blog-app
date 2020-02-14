@@ -1,6 +1,17 @@
 
 <h1>Listing articles</h1>
 
+<%= form_with url: articles_path, method: :get, local: true do |form| %>
+  <p>
+    <%= form.label :keyword %><br>
+    <%= form.text_field :q %>
+  </p>
+
+  <p>
+    <%= form.submit "search" %>
+  </p>
+<% end %>
+
 <%= link_to 'New article', new_article_path %>
 
 <table>
