@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
 
   def index
     if params[:q]
-      @articles = Article.search(columns: [:title], keywords: params[:q])
+      @articles = Article.search(columns: [:title, :description], keywords: params[:q])
       return
     end
 

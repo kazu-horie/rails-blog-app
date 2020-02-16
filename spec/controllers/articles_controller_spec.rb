@@ -23,16 +23,15 @@ RSpec.describe ArticlesController, type: :controller do
           create(
             :article,
             user_id: user.id,
-            title: title,
-            description: 'ベッドがめちゃくちゃ大きかった。'
+            title: title
           )
         end
       end
       let(:titles) do
         [
           'ホテルに泊まった',
-          'ホテルを建てた',
-          '旅館に泊まった'
+          '学校を建てた',
+          'プログラミングを勉強した'
         ]
       end
 

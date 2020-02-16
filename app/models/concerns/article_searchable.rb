@@ -6,12 +6,12 @@ module ArticleSearchable
 
     index_name "articles_#{Rails.env}"
 
-    settings do
+    settings analysis: analyzer_settings do
       mapping do
         indexes :id,          type: 'integer'
         indexes :user_id,     type: 'integer'
-        indexes :title,       type: 'text', analyzer: 'kuromoji'
-        indexes :description, type: 'text', analyzer: 'kuromoji'
+        indexes :title,       type: 'text', analyzer: 'custom_kuromoji'
+        indexes :description, type: 'text', analyzer: 'custom_kuromoji'
       end
     end
 
@@ -57,6 +57,34 @@ module ArticleSearchable
           mappings: mappings.to_hash
         }
       )
+    end
+
+    def analyzer_settings
+      {
+        analyzer: {
+          custom_kuromoji: {
+            type: 'custom',
+            char_filter: [],
+            tokenizer: 'kuromoji_tokenizer',
+            filter: [
+              'kuromoji_baseform',
+              'kuromoji_part_of_speech',
+              'cjk_width',
+              'kuromoji_stemmer',
+              'lowercase',
+              'synonym'
+            ]
+          }
+        },
+        filter: {
+          synonym: {
+            type: 'synonym',
+            synonyms: [
+              '旅館,お宿,旅亭 => ホテル'
+            ]
+          }
+        }
+      }
     end
   end
 end
