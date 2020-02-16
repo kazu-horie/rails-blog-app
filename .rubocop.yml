@@ -48,6 +48,7 @@ Lint/AmbiguousRegexpLiteral:
 Metrics/BlockLength:
   Exclude:
     - "spec/**/*_spec.rb"
+  Max: 30
 
 # 一行の文字長制限を無効
 Layout/LineLength:

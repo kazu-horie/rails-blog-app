@@ -1,24 +1,37 @@
-# README
+# Rails Blog App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+記事の CRUD アプリケーション
 
-Things you may want to cover:
+## System dependencies
 
-* Ruby version
+- MySQL 5.7
+- Redis 5.0.7
+- ElasticSearch 7.6.0
+- Logstash 7.6.0
 
-* System dependencies
+## Setup
 
-* Configuration
+- Homebrew
 
-* Database creation
+```
+# MySQL
+$ brew install mysql@5.7
+$ brew services start mysql@5.7
 
-* Database initialization
+# Redis
+$ brew install redis
+$ brew services start redis
 
-* How to run the test suite
+# ElasticSearch
+$ brew tap elastic/tap
+$ brew install elastic/tap/elasticsearch-full
+$ elasticsearch
 
-* Services (job queues, cache servers, search engines, etc.)
+# Rails
+$ bundle install --path vendor/bundle
+$ bin/rails s
+```
 
-* Deployment instructions
+## How to run the test suite
 
-* ...
+`$ bundle exec rspec`

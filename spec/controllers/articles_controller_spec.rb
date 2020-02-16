@@ -37,20 +37,12 @@ RSpec.describe ArticlesController, type: :controller do
       end
 
       before do
-        # FIXME: 手動で FullText Index を作成しないとインデックスが使えない
-        ActiveRecord::Base.connection.execute "ALTER TABLE articles DROP INDEX index_articles_on_title;"
-        @index_key = "index_articles_on_title_#{Time.current.to_i}"
-        ActiveRecord::Base.connection.execute "CREATE FULLTEXT INDEX #{@index_key} ON articles (title) WITH PARSER ngram;"
-
         login(user)
 
-        get(:index, params: { q: 'ホテル' })
-      end
+        Article.create_index!
+        Article.__elasticsearch__.import(refresh: true)
 
-      after do
-        # FIXME
-        ActiveRecord::Base.connection.execute "ALTER TABLE articles DROP INDEX #{@index_key};"
-        ActiveRecord::Base.connection.execute 'CREATE FULLTEXT INDEX index_articles_on_title ON articles (title) WITH PARSER ngram;'
+        get(:index, params: { q: 'ホテル' })
       end
 
       it { expect(response).to have_http_status(:ok) }

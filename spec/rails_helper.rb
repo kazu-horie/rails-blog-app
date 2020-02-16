@@ -40,7 +40,6 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation, { except: %w[ar_internal_metadata] }
-    # DatabaseCleaner.clean_with(:truncation)
   end
 
   config.around(:each) do |example|
@@ -48,15 +47,6 @@ RSpec.configure do |config|
       example.run
     end
   end
-
-  # config.before(:each) do
-  #   DatabaseCleaner.start
-  # end
-
-  # config.after(:each) do
-  #   DatabaseCleaner.clean
-  #   Rails.cache.clear
-  # end
 
   config.include FactoryBot::Syntax::Methods
 
