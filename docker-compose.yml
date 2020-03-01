@@ -20,6 +20,7 @@ services:
     stdin_open: true
     depends_on:
       - db
+      - redis
   db:
     image: "mysql:5.7"
     environment:
@@ -28,7 +29,15 @@ services:
       - "db:/var/lib/mysql"
     ports:
       - "4306:3306"
+  redis:
+    image: "redis:5.0.7"
+    ports:
+      - "7379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis:/data
 volumes:
   bundle:
   node_modules:
   db:
+  redis:
