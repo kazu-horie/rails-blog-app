@@ -4,6 +4,11 @@ services:
     build:
       context: .
       dockerfile: "Dockerfile"
+    environment:
+      - "DATABASE_USERNAME=root"
+      - "DATABASE_PASSWORD=password"
+      - "DATABASE_HOST=db"
+      - "DATABASE_PORT=3306"
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - ".:/app"
@@ -13,6 +18,17 @@ services:
       - "4000:3000"
     tty: true
     stdin_open: true
+    depends_on:
+      - db
+  db:
+    image: "mysql:5.7"
+    environment:
+      - "MYSQL_ROOT_PASSWORD=password"
+    volumes:
+      - "db:/var/lib/mysql"
+    ports:
+      - "4306:3306"
 volumes:
   bundle:
   node_modules:
+  db:
