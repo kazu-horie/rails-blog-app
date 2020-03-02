@@ -38,14 +38,18 @@ module RecordCache
   end
 
   def update(params)
-    super(params)
+    result = super(params)
 
     self.class.write_cache(self)
+
+    result
   end
 
   def destroy
-    super
+    result = super
 
     self.class.delete_cache(self)
+
+    result
   end
 end
