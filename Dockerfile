@@ -7,9 +7,6 @@ COPY --from=node /usr/local/bin/node /usr/local/bin/
 RUN ln -s /opt/yarn/bin/yarn /usr/local/bin/yarn \
   && ln -s /opt/yarn/bin/yarn /usr/local/bin/yarnpkg
 
-RUN apt-get update -qq && \
-    apt-get install -y nodejs
-
 ENV ENTRYKIT_VERSION 0.4.0
 
 RUN wget https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERSION}/entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz \
