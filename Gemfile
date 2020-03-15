@@ -12,6 +12,7 @@ gem 'redis'
 gem 'devise'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
+gem 'okcomputer'
 
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

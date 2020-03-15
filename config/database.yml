@@ -17,7 +17,6 @@ default: &default
   password: <%= ENV['DATABASE_PASSWORD'] %>
   host: <%= ENV['DATABASE_HOST'] %>
   port: <%= ENV['DATABASE_PORT'] %>
-  socket: /tmp/mysql.sock
 
 development:
   <<: *default
@@ -51,6 +50,4 @@ test:
 #
 production:
   <<: *default
-  database: rails_blog_app_production
-  username: rails_blog_app
-  password: <%= ENV['RAILS_BLOG_APP_DATABASE_PASSWORD'] %>
+  database: <%= ENV['DATABASE_DB'] %>
