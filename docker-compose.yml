@@ -5,13 +5,10 @@ services:
       context: .
       dockerfile: "Dockerfile"
     environment:
-      - "WAIT_HOSTS=es:9200"
-      - "WAIT_HOSTS_TIMEOUT=120"
       - "DATABASE_USERNAME=root"
       - "DATABASE_PASSWORD=password"
       - "DATABASE_HOST=db"
       - "DATABASE_PORT=3306"
-      - "ELASTICSEARCH_HOST=es:9200/"
     command: bash -c "/wait && rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - ".:/app"
@@ -23,8 +20,6 @@ services:
     stdin_open: true
     depends_on:
       - db
-      - redis
-      - es
   db:
     image: "mysql:5.7"
     environment:
@@ -33,34 +28,7 @@ services:
       - "db-data:/var/lib/mysql"
     ports:
       - "4306:3306"
-  redis:
-    image: "redis:5.0.7"
-    ports:
-      - "7379:6379"
-    command: redis-server --appendonly yes
-    volumes:
-      - redis-data:/data
-  es:
-    build:
-      context: ./docker/es
-      dockerfile: "Dockerfile"
-    environment:
-      - node.name=es01
-      - cluster.initial_master_nodes=es01
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - xpack.security.enabled=false
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - es-data:/usr/share/elasticsearch/data
-    ports:
-      - 10200:9200
 volumes:
   bundle:
   node_modules:
   db-data:
-  redis-data:
-  es-data:
