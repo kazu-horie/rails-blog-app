@@ -34,4 +34,5 @@ RUN chmod +x /wait
 ENTRYPOINT [ \
   "prehook", "ruby -v", "--", \
   "prehook", "bundle install -j3 --quiet", "--", \
-  "prehook", "yarn install", "--" ]
+  "prehook", "yarn install", "--", \
+  "prehook", "rm -f tmp/pids/server.pid", "--" ]
