@@ -1,6 +1,6 @@
 class Article < ApplicationRecord
   include RecordCache
-  # include ArticleSearchable
+  include ArticleSearchable
 
   belongs_to :user
 
