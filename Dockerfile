@@ -28,8 +28,8 @@ COPY yarn.lock /app/yarn.lock
 RUN gem install bundler
 
 # elasticsearch コンテナの起動完了を待つ
-ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.7.3/wait /wait
-RUN chmod +x /wait
+# ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.7.3/wait /wait
+# RUN chmod +x /wait
 
 ENTRYPOINT [ \
   "prehook", "ruby -v", "--", \
