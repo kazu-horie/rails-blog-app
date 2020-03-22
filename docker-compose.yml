@@ -5,13 +5,16 @@ services:
       context: .
       dockerfile: "Dockerfile"
     environment:
+      - "WAIT_HOSTS=es:9200"
+      - "WAIT_HOSTS_TIMEOUT=120"
       - "DATABASE_USERNAME=root"
       - "DATABASE_PASSWORD=password"
       - "DATABASE_HOST=db"
       - "DATABASE_PORT=3306"
       - "REDIS_URL_DEVELOPMENT=redis://redis:6379/0"
       - "REDIS_URL_TEST=redis://redis:6379/1"
-    command: bash -c "bundle exec rails s -p 3000 -b '0.0.0.0'"
+      - "ELASTICSEARCH_HOST=es:9200/"
+    command: bash -c "/wait && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - ".:/app"
       - "bundle:/usr/local/bundle"
@@ -23,6 +26,7 @@ services:
     depends_on:
       - db
       - redis
+      - es
   db:
     image: "mysql:5.7"
     environment:
@@ -38,8 +42,27 @@ services:
     command: redis-server --appendonly yes
     volumes:
       - redis-data:/data
+  es:
+    build:
+      context: ./docker/es
+      dockerfile: "Dockerfile"
+    environment:
+      - node.name=es01
+      - cluster.initial_master_nodes=es01
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - xpack.security.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+    ports:
+      - 10200:9200
 volumes:
   bundle:
   node_modules:
   db-data:
   redis-data:
+  es-data:
